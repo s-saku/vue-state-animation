@@ -8,7 +8,7 @@ var babel = require('gulp-babel');
 var webpack = require('gulp-webpack');
 var webpackConfig = require('./webpack.config.js');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8081;
 var reloadPort = process.env.RELOAD_PORT || 35729;
 
 gulp.task('clean', function () {
@@ -24,10 +24,10 @@ gulp.task('lib', function (cb) {
 
 // build for examples with webpack
 gulp.task('build', ['lib'], function () {
-  return gulp.src(webpackConfig.entry.demo[0])
-    .pipe(webpack(webpackConfig))
-    .pipe(gulpif(argv.production, uglify()))
-    .pipe(gulp.dest('build/'));
+//  return gulp.src(webpackConfig.entry.demo[0])
+//    .pipe(webpack(webpackConfig))
+//    .pipe(gulpif(argv.production, uglify()))
+//    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('serve', function () {

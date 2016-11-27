@@ -1,12 +1,12 @@
 {
-  "name": "react-state-animation",
+  "name": "vue-state-animation",
   "main": "index.js",
   "version": "0.0.1",
-  "homepage": "https://github.com/tejitak/react-state-animation",
+  "homepage": "https://github.com/s-saku/vue-state-animation",
   "authors": [
     "tejitak"
   ],
-  "description": "Simple animations with React state",
+  "description": "Simple animations with Vue.js",
   "keywords": [
     "react",
     "animation",
