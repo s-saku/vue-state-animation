@@ -24,7 +24,7 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
-      'react-state-animation': 'src/ReactStateAnimation.js'
+      'vue-state-animation': 'src/VueAnimation.js'
     },
     extensions: ['', '.js', '.jsx']
   }

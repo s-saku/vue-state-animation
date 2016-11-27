@@ -59,31 +59,26 @@ export default class Animate {
     }
 
     /**
-     * Get state value
-     * if the prop is not in state regular property
+     * Get prop value
      */
     _getStateValue(prop) {
-        var c = this._component,
-            v = c.state && c.state[prop]
-        return v === undefined ? c[prop] : v
+        var c = this._component
+        return c[prop]
     }
 
     /**
-     * Set value to state
-     * if the prop is not in state, set value to regular property with force update
+     * Set value to prop
+     * if the prop is not in component.data, set value to regular property with this.$set
      */
     _updateStateValue(prop, v) {
         return new Promise((resolve, reject) => {
             var c = this._component
-            if(c.state && c.state[prop] !== undefined){
-                var state = {}
-                state[prop] = v
-                c.setState(state, resolve)
-            }else{
+            if (c[prop]) {
                 c[prop] = v
-                c.forceUpdate()
-                resolve()
+            } else {
+                this.$set(this, prop, v)
             }
+            resolve()
         })
     }
 
@@ -96,13 +91,12 @@ export default class Animate {
     _updateStateMap(prop, values) {
 
         return new Promise((resolve, reject) => {
-            var c = this._component,
-                state = {};
-            // build up changed state
+            var c = this._component
+            // update prop
             for(var i = 0; i < prop.length; i++) {
-                state[prop[i].state] = values[i];
+                c[prop[i]] = values[i];
             }
-            c.setState(state, resolve);
+            resolve()
         });
     }
 
@@ -134,7 +128,7 @@ export default class Animate {
             var begins = [],
                 ends = [];
             for(var i = 0; i < prop.length; i++) {
-                var b = this._getStateValue(prop[i].state);
+                var b = this._getStateValue(prop[i]);
                 var e = prop[i].target;
                 begins.push(b);
                 ends.push(e);
@@ -190,7 +184,7 @@ export default class Animate {
         for(var i = 0; i < prop.length; i++) {
             var begin = begins[i],
                 end = ends[i],
-                p = prop[i].state,
+                p = prop[i],
                 distance = Math.abs(begin - end),
                 diff = progress * distance,
                 operator = begin > end ? -1 : 1,
